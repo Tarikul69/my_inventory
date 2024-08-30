@@ -4,7 +4,7 @@
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Astha - Inventory</a>
+        <a class="navbar-brand" href="/supper_admin/">Astha - Inventory</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,62 +31,111 @@
     </div>
 </nav>
 {% endblock %}
-{% block productcard %}
+{% block sidebar %}
+<!-- Main Container -->
 <div class="container mt-4">
     <div class="row">
-        <!-- Product Card 1 -->
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Product Name 1</h5>
-                    <p class="card-text text-success">$25.00</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="/supper_admin/" class="list-group-item list-group-item-action active">
+                    <i class="fas fa-tachometer-alt"></i> Add Products
+                </a>
+                <a href="/supper_admin/product/" class="list-group-item list-group-item-action"><i class="fas fa-box"></i>
+                    Add New Products</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-tags"></i>
+                    Categories</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-truck"></i>
+                    Suppliers</a>
+                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-line"></i>
+                    Reports</a>
             </div>
         </div>
-        <!-- Product Card 2 -->
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Product Name 2</h5>
-                    <p class="card-text text-success">$30.00</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
+<!-- Content Area -->
+<div class="col-md-9">
+    <h3>Inventory Dashboard</h3>
+    <hr>
+
+    <!-- Products Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Supplier</th>
+                    <th>Purchaje Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Product A</td>
+                    <td>Category 1</td>
+                    <td>100</td>
+                    <td>$10.00</td>
+                    <td>Supplier X</td>
+                    <td>$10.00</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
+                    </td>
+                </tr>
+                <!-- Additional rows as needed -->
+            </tbody>
+        </table>
             </div>
-        </div>
-        <!-- Product Card 3 -->
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Product Name 3</h5>
-                    <p class="card-text text-success">$40.00</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
+<!-- Add New Product Button -->
+<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
+    <i class="fas fa-plus"></i> Add New Product
+</button>
+</div>
+</div>
+</div>
+<!-- Add Product Modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-        <!-- Product Card 3 -->
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Product Name 3</h5>
-                    <p class="card-text text-success">$40.00</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-            </div>
-        </div>
-        <!-- Product Card 3 -->
-        <div class="col-md-4">
-            <div class="card">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Product Image">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Product Name 3</h5>
-                    <p class="card-text text-success">$40.00</p>
-                    <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productCategory" class="form-label">Category</label>
+                        <select class="form-select" id="productCategory" required>
+                            <option selected>Select Category</option>
+                            <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productQuantity" class="form-label">Quantity</label>
+                        <input type="number" class="form-control" id="productQuantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Price</label>
+                        <input type="text" class="form-control" id="productPrice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Purchage Price</label>
+                        <input type="text" class="form-control" id="productPrice" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="productSupplier" class="form-label">Supplier</label>
+                        <input type="text" class="form-control" id="productSupplier" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
             </div>
         </div>
     </div>

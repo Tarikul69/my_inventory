@@ -3,7 +3,7 @@
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Astha - Inventory</a>
+        <a class="navbar-brand" href="/supper_admin/">Astha - Inventory</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -96,7 +96,7 @@
                     <i class="fas fa-tachometer-alt"></i> Add Products
                 </a>
                 <a href="/supper_admin/product/" class="list-group-item list-group-item-action"><i
-                        class="fas fa-box"></i> Products List</a>
+                        class="fas fa-box"></i> Add New Products</a>
                 <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-tags"></i>
                     Categories</a>
                 <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-truck"></i>
@@ -108,7 +108,7 @@
 
         <!-- Content Area -->
         <div class="col-md-9">
-            <h3>Inventory Dashboard</h3>
+            <h3>Product List</h3>
             <hr>
 
             <!-- Products Table -->
@@ -121,9 +121,7 @@
                             <th>Category</th>
                             <th>Quantity</th>
                             <th>Price</th>
-                            <th>Supplier</th>
-                            <th>Purchaje Price</th>
-                            <th>Actions</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -133,64 +131,14 @@
                             <td>Category 1</td>
                             <td>100</td>
                             <td>$10.00</td>
-                            <td>Supplier X</td>
-                            <td>$10.00</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</button>
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
-                            </td>
+                            
                         </tr>
                         <!-- Additional rows as needed -->
                     </tbody>
                 </table>
             </div>
-
-            <!-- Add New Product Button -->
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addProductModal">
-                <i class="fas fa-plus"></i> Add New Product
-            </button>
         </div>
     </div>
 </div>
 
-<!-- Add Product Modal -->
-<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addProductModalLabel">Add New Product</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label for="productName" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="productName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productCategory" class="form-label">Category</label>
-                        <select class="form-select" id="productCategory" required>
-                            <option selected>Select Category</option>
-                            <option value="1">Category 1</option>
-                            <option value="2">Category 2</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productQuantity" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="productQuantity" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productPrice" class="form-label">Price</label>
-                        <input type="text" class="form-control" id="productPrice" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="productSupplier" class="form-label">Supplier</label>
-                        <input type="text" class="form-control" id="productSupplier" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 {% endblock %}
