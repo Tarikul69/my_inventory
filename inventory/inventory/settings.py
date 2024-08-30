@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'supper_admin',
     'users_admin',
+    'myapp',
 ]
 
 MIDDLEWARE = [
