@@ -14,15 +14,122 @@
 
 <body>
     <!-- Navigation bar -->
-    {% block navbar %}{% endblock %}
+    {% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/users_admin/">Astha - Inventory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/users_admin/">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users_admin/purchage/">Purchage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Suppliers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reports</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% endblock %}
     <!--Card View-->
     {% block card %} {% endblock %}
     <!-- Sidebar -->
     {% block sidebar %} {% endblock %}
+    <!-- Billing-->
+    {% block bill %}{% endblock %}
+    
+    
+    
+    
+    
+    <!--Footer-->
+    {% block footer %}
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <h5>Company Name</h5>
+                    <p class="small">© 2024 Company Name. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3">Privacy Policy</a>
+                    <a href="#" class="text-white me-3">Terms of Service</a>
+                    <a href="#" class="text-white">Contact Us</a>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-center">
+                    <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-white me-2"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function calculateTotalPrice() {
+            let grandTotal = 0;
+            document.querySelectorAll('#productRows tr').forEach(function (row) {
+                const quantity = parseFloat(row.querySelector('.quantity').value) || 0;
+                const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
+                const totalPrice = quantity * unitPrice;
+                row.querySelector('.total-price').value = totalPrice.toFixed(2);
+                grandTotal += totalPrice;
+            });
+            document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        }
 
+        document.getElementById('addRow').addEventListener('click', function () {
+            const newRow = document.querySelector('#productRows tr').cloneNode(true);
+            newRow.querySelectorAll('input').forEach(function (input) {
+                input.value = '';
+                if (input.classList.contains('quantity')) {
+                    input.value = 1;
+                }
+                if (input.classList.contains('unit-price')) {
+                    input.value = '0.00';
+                }
+            });
+            document.getElementById('productRows').appendChild(newRow);
+        });
+
+        document.getElementById('productRows').addEventListener('input', function (e) {
+            if (e.target.classList.contains('quantity') || e.target.classList.contains('unit-price')) {
+                calculateTotalPrice();
+            }
+        });
+
+        document.getElementById('productRows').addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-row')) {
+                if (document.querySelectorAll('#productRows tr').length > 1) {
+                    e.target.closest('tr').remove();
+                    calculateTotalPrice();
+                }
+            }
+        });
+
+        calculateTotalPrice(); // Calculate on page load
+    });
+        </script>
 </body>
 
 </html>
