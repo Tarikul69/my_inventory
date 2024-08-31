@@ -1,36 +1,4 @@
 {% extends 'supper_admin/super_admin.html' %}
-
-<!-- Navigation bar -->
-{% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/supper_admin/">Astha - Inventory</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/supper_admin/">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Suppliers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Reports</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-{% endblock %}
 {% block sidebar %}
 <!-- Main Container -->
 <div class="container mt-4">
@@ -38,13 +6,13 @@
         <!-- Sidebar -->
         <div class="col-md-3">
             <div class="list-group">
-                <a href="/supper_admin/" class="list-group-item list-group-item-action active">
-                    <i class="fas fa-tachometer-alt"></i> Add Products
+                <a href="#" class="list-group-item list-group-item-action active">
+                    <i class="fas fa-tachometer-alt"></i> Add Produ
                 </a>
                 <a href="/supper_admin/product/" class="list-group-item list-group-item-action"><i class="fas fa-box"></i>
                     Add New Products</a>
-                <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-tags"></i>
-                    Categories</a>
+                <a href="/supper_admin/barcode-generator/" class="list-group-item list-group-item-action"><i class="fas fa-tags"></i>
+                    BAR-Code</a>
                 <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-truck"></i>
                     Suppliers</a>
                 <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-chart-line"></i>
