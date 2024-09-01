@@ -4,104 +4,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management</title>
+    <title>Inventory Dashboard</title>
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+    
+        .sidebar {
+            height: 100vh;
+            background-color: #343a40;
+            padding-top: 20px;
+            position: fixed;
+            width: 250px;
+            transition: transform 0.3s ease;
+        }
+    
+        .sidebar a {
+            color: white;
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+    
+        .sidebar a:hover {
+            background-color: #495057;
+            border-radius: 5px;
+        }
+    
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+    
+        .card-custom {
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+    
+        .stats-card {
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+        }
+    
+        .bg-confirmed {
+            background-color: #17a2b8;
+        }
+    
+        .bg-toship {
+            background-color: #ffc107;
+        }
+    
+        .bg-todeliver {
+            background-color: #28a745;
+        }
+    
+        .bg-invoiced {
+            background-color: #dc3545;
+        }
+    
+        .chart {
+            height: 150px;
+        }
+    
+        .widget-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    
+        .widget-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+    
+        .widget-subtitle {
+            font-size: 12px;
+            color: #6c757d;
+        }
+    
+        .table-responsive {
+            overflow-x: auto;
+        }
+    
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                transform: translateX(-100%);
+            }
+    
+            .content {
+                margin-left: 0;
+            }
+    
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+    
+        @media (max-width: 768px) {
+            .stats-card .widget-value {
+                font-size: 20px;
+            }
+    
+            .stats-card {
+                font-size: 14px;
+            }
+    
+            .widget-title {
+                font-size: 14px;
+            }
+    
+            .widget-value {
+                font-size: 20px;
+            }
+    
+            .widget-subtitle {
+                font-size: 10px;
+            }
+        }
+    
+        @media (max-width: 576px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+    
+            .content {
+                margin-left: 0;
+            }
+    
+            .stats-card {
+                padding: 10px;
+            }
+    
+            .sidebar.active {
+                transform: translateX(0);
+            }
+    
+            .sidebar-toggle {
+                display: block;
+            }
+        }
+    
+        .sidebar-toggle {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 9999;
+            background-color: #343a40;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">Inventory Management</h1>
-        <div class="text-right mb-3">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#addItemModal">Add Item</button>
-        </div>
-
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Item Name</th>
-                    <th>Category</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="inventoryTable">
-                <!-- Inventory items will be dynamically added here -->
-            </tbody>
-        </table>
+    <button class="sidebar-toggle" id="sidebarToggle">☰ Menu</button>
+    
+    <div class="sidebar" id="sidebar">
+        <a href="#">Dashboard</a>
+        <a href="#">Contacts</a>
+        <a href="#">Items</a>
+        <a href="#">Sales Orders</a>
+        <a href="#">Packages</a>
+        <a href="#">Invoices</a>
+        <a href="#">Purchase Orders</a>
+        <a href="#">Bills</a>
+        <a href="#">Reports</a>
     </div>
 
-    <!-- Add Item Modal -->
-    <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addItemModalLabel">Add Inventory Item</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="content">
+        <div class="container-fluid">
+            <h1 class="mb-4">Inventory Dashboard</h1>
+
+            <!-- Sales Activity Cards -->
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="card-custom bg-confirmed stats-card">
+                        <div>Confirmed</div>
+                        <div class="widget-value">29</div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form id="addItemForm">
-                        <div class="form-group">
-                            <label for="itemName">Item Name</label>
-                            <input type="text" class="form-control" id="itemName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Category</label>
-                            <input type="text" class="form-control" id="category" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="quantity">Quantity</label>
-                            <input type="number" class="form-control" id="quantity" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Price</label>
-                            <input type="number" class="form-control" id="price" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add Item</button>
-                    </form>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="card-custom bg-toship stats-card">
+                        <div>To Be Shipped</div>
+                        <div class="widget-value">35</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="card-custom bg-todeliver stats-card">
+                        <div>To Be Delivered</div>
+                        <div class="widget-value">17</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-3">
+                    <div class="card-custom bg-invoiced stats-card">
+                        <div>Invoiced</div>
+                        <div class="widget-value">24</div>
+                    </div>
+                    </div>
+                    </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <!-- Inventory Summary -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card-custom p-3">
+                        <div class="widget-title">Inventory Summary</div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div class="widget-value">654</div>
+                                <div class="widget-subtitle">Quantity in Hand</div>
+                            </div>
+                            <div class="col">
+                                <div class="widget-value">100</div>
+                                <div class="widget-subtitle">Quantity to be Received</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-    <script>
-        // JavaScript to handle form submission and table updates
-        const inventoryTable = document.getElementById('inventoryTable');
+                <!-- Product Details -->
+                <div class="col-md-6">
+                    <div class="card-custom p-3">
+                        <div class="widget-title">Product Details</div>
+                        <div class="mt-3">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="widget-value text-danger">30</div>
+                                    <div class="widget-subtitle">Low Stock Variants</div>
+                                </div>
+                                <div class="col">
+                                    <div class="widget-value">130</div>
+                                    <div class="widget-subtitle">All Items</div>
+                                </div>
+                                <div class="col">
+                                    <div class="widget-value">200</div>
+                                    <div class="widget-subtitle">All Variants</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
 
-        document.getElementById('addItemForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+            <!-- Purchase and Sales Orders -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card-custom p-3">
+                        <div class="widget-title">Purchase Order</div>
+                        <div class="mt-3">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="widget-value">250</div>
+                                    <div class="widget-subtitle">Qty Ordered</div>
+                                </div>
+                                <div class="col">
+                                    <div class="widget-value">$12,574.00</div>
+                                    <div class="widget-subtitle">Total Cost</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            const itemName = document.getElementById('itemName').value;
-            const category = document.getElementById('category').value;
-            const quantity = document.getElementById('quantity').value;
-            const price = document.getElementById('price').value;
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${itemName}</td>
-                <td>${category}</td>
-                <td>${quantity}</td>
-                <td>${price}</td>
-                <td>
-                    <button class="btn btn-warning btn-sm">Edit</button>
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </td>
-            `;
-            inventoryTable.appendChild(row);
-
-            // Reset the form and close the modal
-            document.getElementById('addItemForm').reset();
-            $('#addItemModal').modal('hide');
-        });
-    </script>
-</body>
-
-</html>
+                <div class="col-md-6">
+                    <div class="card-custom p-3">
+                        <div class="widget-title">Sales Order</div>
+                        <div class="mt-3 table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Channel</th>
+                                        <th>Draft</th>
+                                        <th>Confirmed</th>
+                                        <th>Partially Shipped</th>
+                                        <th>Shipped</th>
+                                        <th>Delivered</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Amazon Web Services</td>
+                                        <td>25</td>
+                                        <td>55</td>
+                                        <td>40</td>
+                                        <td>50</td>
+                                        <td>60</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Etsy</td>
+                                        <td>10</td>
+                                        <td>20</td>
+                                        <td>30</td>
+                                        <td>40</td>
+                                        <td>50</td>
+                                    </tr>
+                                    <!-- Additional rows can
