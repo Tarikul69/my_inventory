@@ -10,6 +10,9 @@ def supper_admin(request):
 def product_list(request):
     return render(request, 'supper_admin/product_list.html')
 
+def inventory(request):
+    return render(request, 'supper_admin/inventory.html')
+
 def barcode_generator(request):
     print("good")
      
