@@ -42,44 +42,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>Product A</td>
+                            {% for product in products %}
+                            <td>{{product.id}}</td>
+                            <td>{{product.p_name}}</td>
                             <td>Category 1</td>
                             <td>100</td>
-                            <td>$10.00</td>
+                            <td>${{product.price}}</td>
 
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Product A</td>
-                            <td>Category 1</td>
-                            <td>100</td>
-                            <td>$10.00</td>
-                        
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Product A</td>
-                            <td>Category 1</td>
-                            <td>100</td>
-                            <td>$10.00</td>
-                        
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Product A</td>
-                            <td>Category 1</td>
-                            <td>100</td>
-                            <td>$10.00</td>
-                        
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Product A</td>
-                            <td>Category 1</td>
-                            <td>100</td>
-                            <td>$10.00</td>
-                        </tr>
+                        {% endfor %}
                         <!-- Additional rows as needed -->
                     </tbody>
                 </table>
