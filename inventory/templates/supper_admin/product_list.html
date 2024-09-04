@@ -79,32 +79,33 @@
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="productName" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="productName" required>
+                        <input type="text" name="productName" class="form-control" id="productName" required>
                     </div>
                     
                     <div class="mb-3">
                         <label for="productCategory" class="form-label">Category</label>
-                        <select class="form-select" id="productCategory" required>
+                        <select class="form-select" name="productCategory" id="productCategory" required>
                             <option selected>Select Category</option>
                             <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
                             <option value="2">Category 2</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="productQuantity" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="productQuantity" required>
+                        <input type="number" name="productQuantity" class="form-control" id="productQuantity" required>
                     </div>
                     <div class="mb-3">
                         <label for="productPrice" class="form-label">Price</label>
-                        <input type="text" class="form-control" id="productPrice" required>
+                        <input type="text" name="productPrice" class="form-control" id="productPrice" required>
                     </div>
                     <div class="mb-3">
-                        <label for="productPrice" class="form-label">Purchage Price</label>
-                        <input type="text" class="form-control" id="productPrice" required>
+                        <label for="purchasePrice" class="form-label">Purchage Price</label>
+                        <input type="text" name="purchasePrice" class="form-control" id="purchasePrice" required>
                     </div>
                     <div class="mb-3">
                         <label for="productSupplier" class="form-label">Supplier</label>
-                        <input type="text" class="form-control" id="productSupplier" required>
+                        <input type="text" name="productSupplier" class="form-control" id="productSupplier" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                     </form>
