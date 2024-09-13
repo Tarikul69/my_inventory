@@ -70,19 +70,7 @@ JAZZMIN_SETTINGS = {
     #############
     # Side Menu #
     #############
-    "side_menu": [
-        # Link to Django admin views (Model-based)
-        {"name": "Users", "icon": "fas fa-users", "model": "auth.user"},
-
-        # Link to a custom admin view
-        {"name": "My Custom View", "url": "my_custom_view", "icon": "fas fa-cog"},
-
-        # Link to an external URL
-        {"name": "Django Docs", "url": "https://docs.djangoproject.com", "icon": "fas fa-book"},
-
-        # Link to another Django app's model
-        {"name": "Products", "icon": "fas fa-box", "model": "myapp.product"},
-    ],
+    
     # Whether to display the side menu
     "show_sidebar": True,
 
